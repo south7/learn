@@ -21,5 +21,7 @@ public class Note {
  *       查询表中数据:以findXxx()形式命名，例如:findById(),findByName(),findAll()
  *       统计表中数据：以getXxx()形式命名,例如getAllCount()
  * 数据层实现类:数据层的打开和关闭操作应该由业务层控制会比较好，所有的数据层实现类要求保存在dao.impl子包下
+ * 业务层开发:业务层是真正给外部调用的，可能是控制层，或者是直接调用
+ * 业务层标准:IEmpService
  */
 }
