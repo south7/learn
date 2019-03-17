@@ -20,5 +20,6 @@ public class Note {
  *   查询:查询两种形式
  *       查询表中数据:以findXxx()形式命名，例如:findById(),findByName(),findAll()
  *       统计表中数据：以getXxx()形式命名,例如getAllCount()
+ * 数据层实现类:数据层的打开和关闭操作应该由业务层控制会比较好，所有的数据层实现类要求保存在dao.impl子包下
  */
 }

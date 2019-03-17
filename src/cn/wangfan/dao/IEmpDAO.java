@@ -65,6 +65,6 @@ public interface IEmpDAO {
 	 * @return 返回表中的数据量,如果没有数据返回0
 	 * @throws Exception SQL执行异常
 	 */
-	public List<Emp>findAllCount(String column,String keyWord)throws Exception;
+	public Integer findAllCount(String column,String keyWord)throws Exception;
 
 }
