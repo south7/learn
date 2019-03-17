@@ -1,14 +1,13 @@
-package com.wangfan.service.impl;
+package cn.wangfan.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.wangfan.factory.DAOFactory;
-import com.wangfan.service.IEmpService;
-
 import cn.wangfan.dbc.DatabaseConnection;
+import cn.wangfan.factory.DAOFactory;
+import cn.wangfan.service.IEmpService;
 import cn.wangfan.vo.Emp;
 
 public class EmpServiceImpl implements IEmpService {

@@ -1,4 +1,4 @@
-package com.wangfan.factory;
+package cn.wangfan.factory;
 
 import java.sql.Connection;
 

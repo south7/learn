@@ -1,4 +1,4 @@
-package com.wangfan.service;
+package cn.wangfan.service;
 
 import java.util.List;
 import java.util.Map;

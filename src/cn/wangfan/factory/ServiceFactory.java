@@ -1,7 +1,7 @@
-package com.wangfan.factory;
+package cn.wangfan.factory;
 
-import com.wangfan.service.IEmpService;
-import com.wangfan.service.impl.EmpServiceImpl;
+import cn.wangfan.service.IEmpService;
+import cn.wangfan.service.impl.EmpServiceImpl;
 /**
  * 业务层工厂类
  * 这里不区分前后台业务工厂
