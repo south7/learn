@@ -32,7 +32,7 @@ public class Note {
  *1.前台业务逻辑：可以将其保存在service.front包中，工厂类：ServiceFrontFactory
  *2.后台业务逻辑：可以将其保存在service.back包中，工厂类:ServiceBackFactory
  *在实际的编写之中，之类永远都是不可见的，控制层完全看不见数据库的任何操作
- *
+ *业务测试:使用junit是最好的选择
  *
  *
  */

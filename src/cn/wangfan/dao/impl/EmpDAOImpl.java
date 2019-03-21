@@ -25,7 +25,7 @@ public class EmpDAOImpl implements IEmpDAO{
     }
 	@Override
 	public boolean doCreate(Emp vo) throws Exception {
-		String sql="INSERT INTO emp(empno.ename,job,hiredate,sal,comm)VALUES(?,?,?,?,?,?)";
+		String sql="INSERT INTO emp(empno,ename,job,hiredate,sal,comm)VALUES(?,?,?,?,?,?)";
 		this.pstmt=this.conn.prepareStatement(sql);
 		this.pstmt.setInt(1, vo.getEmpno());
 		this.pstmt.setString(2, vo.getEname());
@@ -38,7 +38,7 @@ public class EmpDAOImpl implements IEmpDAO{
 
 	@Override
 	public boolean doUpdate(Emp vo) throws Exception {
-		String sql="UPDATE emp set empno=?,ename=?,job=?,hiredate=?,sal=?,comm=?)where empno=?";
+		String sql="UPDATE emp SET ename=?,job=?,hiredate=?,sal=?,comm=?  WHERE empno=?";
 		this.pstmt=this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getEname());
 		this.pstmt.setString(2, vo.getJob());
@@ -61,6 +61,7 @@ public class EmpDAOImpl implements IEmpDAO{
 			sql.append(iter.next()).append(",");
 		}
 		sql.delete(sql.length()-1, sql.length());
+		sql.append(")");
 		this.pstmt=this.conn.prepareStatement(sql.toString());
 		return this.pstmt.executeUpdate()==ids.size();
 	}
@@ -68,7 +69,7 @@ public class EmpDAOImpl implements IEmpDAO{
 	@Override
 	public Emp findById(Integer id) throws Exception {
 		Emp vo=null;
-		String sql="SELECT empno,ename,job,hiredate,sal,comm WHERE empno=?";
+		String sql="SELECT empno,ename,job,hiredate,sal,comm FROM emp WHERE empno=?";
 		this.pstmt=this.conn.prepareStatement(sql);
 		this.pstmt.setInt(1, id);
 		ResultSet rs=this.pstmt.executeQuery();
@@ -87,7 +88,7 @@ public class EmpDAOImpl implements IEmpDAO{
 	@Override
 	public List<Emp> findAll() throws Exception {
 		List<Emp>all=new ArrayList<Emp>();
-		String sql="SELECT empno,ename,job,hiredate,sal,comm";
+		String sql="SELECT empno,ename,job,hiredate,sal,comm FROM emp";
 		this.pstmt=this.conn.prepareStatement(sql);
 		ResultSet rs=this.pstmt.executeQuery();
 		while(rs.next()){
@@ -103,7 +104,8 @@ public class EmpDAOImpl implements IEmpDAO{
 		return all;
 	}
 
-	@Override
+	/*oracleÊý¾Ý¿â
+	 * @Override
 	public List<Emp> findAllSplit(Integer currentPage, Integer lineSize, String column, String keyWord)
 			throws Exception {
 		List<Emp>all=new ArrayList<Emp>();
@@ -126,8 +128,29 @@ public class EmpDAOImpl implements IEmpDAO{
 			all.add(vo);
 		}
 		return all;
+	}*/
+	@Override
+	public List<Emp> findAllSplit(Integer currentPage, Integer lineSize, String column, String keyWord)
+			throws Exception {
+		List<Emp>all=new ArrayList<Emp>();
+		String sql="SELECT empno,ename,job,hiredate,sal,comm FROM emp WHERE "+column+" LIKE ? limit ?,? ";
+		this.pstmt=this.conn.prepareStatement(sql);
+		this.pstmt.setString(1, "%" + keyWord + "%");
+		this.pstmt.setInt(2, (currentPage-1)*lineSize);
+		this.pstmt.setInt(3, lineSize);
+		ResultSet rs=this.pstmt.executeQuery();
+		while(rs.next()){
+			Emp vo=new Emp();
+			vo.setEmpno(rs.getInt(1));
+			vo.setEname(rs.getString(2));
+			vo.setJob(rs.getString(3));
+			vo.setHiredate(rs.getDate(4));
+			vo.setSal(rs.getDouble(5));
+			vo.setComm(rs.getDouble(6));
+			all.add(vo);
+		}
+		return all;
 	}
-
 	@Override
 	public Integer findAllCount(String column, String keyWord) throws Exception {
 		String sql="SELECT COUNT(empno) FROM emp WHERE "+ column + " LIKE ?";
